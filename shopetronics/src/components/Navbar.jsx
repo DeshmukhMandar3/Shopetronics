@@ -26,7 +26,7 @@ export default function Navbar(){
 
     //console.log(Country);
     return(
-        <Flex  bg={'rgb(30,128,253)'} direction={"column"} color={"white"}>
+        <Flex  bg={'rgb(30,128,253)'} direction={"column"} color={"white"} marginBottom={"20px"}>
         {/* Top Box */}
             <Box display={"flex"} justifyContent={"right"} marginRight={"80px"}>
                   {/* Save 50 $ */}
