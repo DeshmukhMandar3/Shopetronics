@@ -13,7 +13,7 @@ export default function EnjoyLife(){
                     <Text>Gift ideas for your special ones</Text>
                     <Flex>
                         <Card>
-                            <CardBody >
+                            <CardBody>
                                 <Image
                                 src='https://img.gkbcdn.com/bn/2212/5-639696402b40c948ec525e98._p1_.jpg'
                                 alt='Green double couch with wooden legs'
