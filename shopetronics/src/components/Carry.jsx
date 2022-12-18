@@ -2,19 +2,25 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import {Box,Image,Card,CardBody,Stack,Text} from '@chakra-ui/react'
 import React from "react"
+import { useNavigate } from "react-router-dom";
 
 export default function Carry(){
     const [Data,setData]=React.useState([]);
+    const navigate=useNavigate();
 
     React.useEffect(()=>{
         async function getData(){
             let res=await fetch(`http://localhost:8080/New_for_you`);
             let data=await res.json();
-            console.log("NewForYou",data);
+            //console.log("NewForYou",data);
             setData(data);
         }
         getData();
     },[]);
+
+    function handleClick(){
+      navigate('/all/New_for_you');
+    }
 
     const responsive = {
         superLargeDesktop: {
@@ -38,20 +44,20 @@ export default function Carry(){
 
       return (
         <Box display={"flex"} alignItems={"center"} marginTop={"20px"} padding={"4px"}>
-        <Box><Image w={"110%"} h="300px" src={'https://img.gkbcdn.com/bn/2212/300x380-638d8ff32b40c93c747240ee._p1_.jpg'}/></Box>
+        <Box><Image w={"110%"} h="300px" src={'https://img.gkbcdn.com/bn/2212/300x380-638d8ff32b40c93c747240ee._p1_.jpg'} onClick={handleClick}/></Box>
         <Box w="75%" >
         <Carousel responsive={responsive}>
             {
                 Data.length!=0 && Data.map((el)=>{
                     return (
-                    <Card maxW='sm' key={el.items_p} height={"300px"}>
+                    <Card maxW='sm' key={el.title} height={"300px"}>
                             <CardBody bg={"white"} height={"300px"}>
                                 <Box h={"40%"}>
-                                <Image h={"100%"} src={el.lazy_imgsrc} borderRadius='lg' display={"block"} margin={"auto"}/>
+                                <Image h={"100%"} src={el.image} borderRadius='lg' display={"block"} margin={"auto"}/>
                                 </Box>
                                 {/* <Stack mt='6' spacing='3'> */}
-                                <Box h={"40%"}color="black" fontSize="13px" overflow={"hidden"} margin={"10px"}>{el.items_p}</Box>
-                                <Box h={"10%"}  color='black' fontSize='15px' marginLeft={"10px"}><b>{el.items_price}</b></Box>
+                                <Box h={"40%"}color="black" fontSize="13px" overflow={"hidden"} margin={"10px"}>{el.title}</Box>
+                                <Box h={"10%"}  color='black' fontSize='15px' marginLeft={"10px"}><b>{el.sellingPrice}</b></Box>
                                 {/* </Stack> */}
                             </CardBody>
                             </Card>

@@ -1,11 +1,16 @@
 import {Box,Flex, Popover, PopoverTrigger, PopoverContent, PopoverHeader,PopoverBody,PopoverFooter,PopoverArrow,Button,Text,Image,InputGroup,InputLeftAddon,Grid,Input,InputRightAddon,Select} from "@chakra-ui/react";
+import {Link} from "react-router-dom"
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 export default function Navbar(){
     const [Country,setCountry]=React.useState(null);
     const [Currency,setCurrency]=React.useState(null);
     const [cur,setCur]=React.useState("INR");
     const [ship,setShip]=React.useState('India');
+    const navigate=useNavigate();
+    const {Price,Count,username,isAuth} =React.useContext(AuthContext);
     
     React.useEffect(()=>{
        async function getCountry(){
@@ -93,7 +98,7 @@ export default function Navbar(){
             </Box>
         {/* Middle Box */}
             <Flex h="70px" alignItems={"center"} borderTop={"0.3px solid RGB(210 223 235)"} justifyContent="space-evenly">
-               <Box w={"17%"} h={"100%"}><Image w={"100%"} h={"100%"} src={'https://64.media.tumblr.com/3cc401364c5c9425bd4eb71c383d5049/95991999c0eacd3a-00/s500x750/e4dbb7cecfc4aa397cffdcce758303e4bbe4d58e.pnj'}/></Box>
+               <Box onClick={()=>{navigate('/')}} w={"17%"} h={"100%"}><Image w={"100%"} h={"100%"} src={'https://64.media.tumblr.com/3cc401364c5c9425bd4eb71c383d5049/95991999c0eacd3a-00/s500x750/e4dbb7cecfc4aa397cffdcce758303e4bbe4d58e.pnj'}/></Box>
                {/* Search */}
                <Box marginLeft="15px">
                <InputGroup color={"grey"}>
@@ -149,7 +154,7 @@ export default function Navbar(){
                 </Box>
 
                 {/* SignIn */}
-                <Box>
+                <Box>{isAuth ? <Text as="b">Hi {username}</Text> : 
                     <Popover trigger={"hover"}>
                         <PopoverTrigger>
                             <Button bg="none" _hover={{bg:"none"}} fontSize="13px"><span class="material-symbols-outlined">person_filled</span>Sign In</Button>
@@ -158,25 +163,25 @@ export default function Navbar(){
                             <PopoverArrow />
                             <Box margin="25px" textAlign={"center"}>Welcome to Shopetronics</Box>
                             <Flex justifyContent={"space-evenly"} marginBottom="20px">
-                                    <Button _hover={{bg:"rgb(45,123,255)"}} w='100px' bg='rgb(45,123,255)' color="white" fontSize="13px">Join</Button>
-                                    <Button _hover={{bg:'skyblue'}} w='100px' bg='skyblue' color="blue" border="solid blue 0.5px" fontSize="13px">SignIn</Button>
+                                    <Button _hover={{bg:"rgb(45,123,255)"}} w='100px' bg='rgb(45,123,255)' color="white" fontSize="13px"><Link to="/SignUp">Join</Link></Button>
+                                    <Button _hover={{bg:'skyblue'}} w='100px' bg='skyblue' color="blue" border="solid blue 0.5px" fontSize="13px"><Link to="/login">SignIn</Link></Button>
                             </Flex>
                         </PopoverContent>
-                    </Popover>
+                    </Popover> }
                 </Box>
                 {/* Cart */}
-                <Box >
-                    <Popover trigger={'hover'}>
+                <Box cursor={"pointer"} onClick={()=>{navigate("/cart")}}>
+                    <Popover trigger={'hover'} >
                         <PopoverTrigger>
                             <span class="material-symbols-outlined">shopping_cart</span>
                         </PopoverTrigger>
                             <PopoverContent color="black">
                             <PopoverArrow />
                             <Flex justifyContent="space-evenly" margin="20px">
-                                <Text>Items:</Text>
-                                <Text>Total: ₹</Text>
+                                <Text>Items:{Count}</Text>
+                                <Text>Total: ₹{Price}</Text>
                             </Flex>
-                            <Button margin="20px" bg="rgb(45,123,255)" color="white" _hover={{bg:'rgb(45,123,255)'}}>View Cart</Button>
+                            <Button margin="20px" bg="rgb(45,123,255)" color="white" _hover={{bg:'rgb(45,123,255)'}} onClick={()=>{navigate("/cart")}}>View Cart</Button>
                             </PopoverContent>
                     </Popover>
                 </Box>
