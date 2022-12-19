@@ -1,47 +1,25 @@
 {
-  "name": "shopetronics",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@chakra-ui/icons": "^2.0.14",
-    "@chakra-ui/react": "^2.4.3",
-    "@emotion/react": "^11.10.5",
-    "@emotion/styled": "^11.10.5",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "framer-motion": "^7.8.0",
-    "nodemon": "^2.0.20",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-icons": "^4.7.1",
-    "react-multi-carousel": "^2.8.2",
-    "react-router-dom": "^6.5.0",
-    "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
-  },
+  "name": "consturct_week_3",
+  "version": "1.0.0",
+  "description": "<Construct Week -3 Project>\r <GeekBuying.com>",
+  "main": "index1.js",
   "scripts": {
-    "start": "node index1.js",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DeshmukhMandar3/-violet-spark-1183.git"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DeshmukhMandar3/-violet-spark-1183/issues"
+  },
+  "homepage": "https://github.com/DeshmukhMandar3/-violet-spark-1183#readme",
+  "dependencies": {
+    "json-server": "^0.17.1",
+    "nodemon": "^2.0.20"
   }
 }
