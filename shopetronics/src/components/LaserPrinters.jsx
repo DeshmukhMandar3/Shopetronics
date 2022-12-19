@@ -8,7 +8,7 @@ export default function LaserPrinters(){
     let count=0;
     React.useEffect(()=>{
         async function getData(){
-            let res=await fetch(`http://localhost:8080/laserPrinters`);
+            let res=await fetch(`https://vivacious-moth-jewelry.cyclic.app/laserPrinters`);
             let data=await res.json();
             //console.log("Bestsellers",data);
             setData(data);

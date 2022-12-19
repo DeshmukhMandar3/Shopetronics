@@ -22,7 +22,7 @@ export default function Home(){
         let count=0;
         let sp=0;
 
-        let res=await fetch(`http://localhost:8080/cart`);
+        let res=await fetch(`https://vivacious-moth-jewelry.cyclic.app/cart`);
         let data=await res.json();
         //console.log(data);
         data.map((el)=>{ 

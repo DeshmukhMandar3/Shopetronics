@@ -8,7 +8,7 @@ export default function Bluetooth(){
     let count=0;
     React.useEffect(()=>{
         async function getData(){
-            let res=await fetch(`http://localhost:8080/bluetooth`);
+            let res=await fetch(`https://vivacious-moth-jewelry.cyclic.app/bluetooth`);
             let data=await res.json();
            // console.log("bluetooth",data);
             setData(data);

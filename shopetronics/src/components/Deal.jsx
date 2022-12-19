@@ -7,7 +7,7 @@ export default function Deal(){
     const navigate=useNavigate();
     React.useEffect(()=>{
         async function getData(){
-            let res=await fetch(`http://localhost:8080/deal_of_the_day`);
+            let res=await fetch(`https://vivacious-moth-jewelry.cyclic.app/deal_of_the_day`);
             let data=await res.json();
            // console.log(data);
             setData(data);

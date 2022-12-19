@@ -8,7 +8,7 @@ export default function Vaccum(){
     let count=0;
     React.useEffect(()=>{
         async function getData(){
-            let res=await fetch(`http://localhost:8080/vacuum_cleaner`);
+            let res=await fetch(`https://vivacious-moth-jewelry.cyclic.app/vacuum_cleaner`);
             let data=await res.json();
            // console.log("Vaccum",data);
             setData(data);

@@ -17,7 +17,7 @@ export default function SignUp(){
             username,email,password
         }
 
-        let res=await fetch(`http://localhost:8080/auth`,{
+        let res=await fetch(`https://vivacious-moth-jewelry.cyclic.app/auth`,{
             method:"POST",
             body:JSON.stringify(send),
             headers:{
@@ -47,9 +47,9 @@ export default function SignUp(){
                     <form onSubmit={handleSubmit}>
                         <FormControl >
                             <Flex justifyContent="space-between"><FormLabel>Create Your Account</FormLabel> <Link to="/login">Sign In</Link></Flex>
-                            <Input value={username} onChange={(e)=>{setUsername(e.target.value)}}margin="10px" type='text' placeHolder="Nick name" />
-                            <Input value={email} onChange={(e)=>{setEmail(e.target.value)}} margin="10px" type='email' placeHolder='Email address'/>
-                            <Input value={password} onChange={(e)=>{setPassword(e.target.value)}} margin="10px" type='password' placeHolder='Password'/>
+                            <Input value={username} onChange={(e)=>setUsername(e.target.value)}margin="10px" type='text' placeHolder="Nick name" />
+                            <Input value={email} onChange={(e)=>setEmail(e.target.value)} margin="10px" type='email' placeHolder='Email address'/>
+                            <Input value={password} onChange={(e)=>setPassword(e.target.value)} margin="10px" type='password' placeHolder='Password'/>
                             <Checkbox isChecked={condition} onChange={()=>{setCondition(!condition)}}>I agree to Shopetronics' Terms of Use & Privacy Policy.</Checkbox>
                             <Input margin="10px" type="submit" bg="rgb(30,128,253)" color="white" cursor="pointer"/>
                         </FormControl>

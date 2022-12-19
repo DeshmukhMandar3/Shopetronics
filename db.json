@@ -6896,41 +6896,6 @@
     }
   ],
   "auth": [
-    {
-      "username": "Mandar Deshmukh",
-      "email": "mandardeshmukh.mud@gmail.com",
-      "password": "Mandar@123",
-      "id": 1
-    },
-    {
-      "username": "Mandar Deshmukh",
-      "email": "mandardeshmukh.mud@gmail.com",
-      "password": "mandar@123",
-      "id": 2
-    },
-    {
-      "username": "Mandar Deshmukh",
-      "email": "mandardeshmukh.mud@gmail.com",
-      "password": "Mandar@123",
-      "id": 3
-    },
-    {
-      "username": "Mandar Deshmukh",
-      "email": "mandardeshmukh.mud@gmail.com",
-      "password": "Mandar@123",
-      "id": 4
-    },
-    {
-      "username": "Janaman Malan",
-      "email": "malan@gmail.com",
-      "password": "Malan@123",
-      "id": 5
-    },
-    {
-      "username": "Aliseter Cook",
-      "email": "cook@gmail.com",
-      "password": "cook@123",
-      "id": 6
-    }
+     
   ]
 }

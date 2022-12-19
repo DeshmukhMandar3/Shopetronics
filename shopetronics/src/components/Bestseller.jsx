@@ -11,7 +11,7 @@ export default function Bestseller(){
     const navigate=useNavigate();
     React.useEffect(()=>{
         async function getData(){
-            let res=await fetch(`http://localhost:8080/bestsellers`);
+            let res=await fetch(`https://vivacious-moth-jewelry.cyclic.app/bestsellers`);
             let data=await res.json();
           //  console.log("Bestsellers",data);
             setData(data);

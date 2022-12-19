@@ -4,6 +4,7 @@ import  LargeWithAppLinksAndSocial from "../components/Footer"
 import {Box, SimpleGrid, Card, CardBody, Image, Stack, Badge,Text,Button,Flex} from "@chakra-ui/react"
 import Star from "../components/Star"
 import { AuthContext } from "../context/AuthContext";
+import axios from 'axios'
 
 
 export default function Cart(){
@@ -64,7 +65,7 @@ export default function Cart(){
 
     
     async function getData(){
-        let res=await fetch(`http://localhost:8080/cart/`);
+        let res=await fetch(`https://vivacious-moth-jewelry.cyclic.app/cart/`);
         let data=await res.json();
         console.log("all Products",data);
         setData(data)
@@ -72,7 +73,7 @@ export default function Cart(){
        }
 
 
-   async function DeleteItem(el){
+     function DeleteItem(el){
         // let sp=(el.sellingPrice).split("");
         // sp.shift();
         // let ans=sp.join("");
@@ -80,10 +81,16 @@ export default function Cart(){
         // console.log("ans",ans);
 
         // Increase((Price-ans),(Count-1))
-        let res=await fetch(`http://localhost:8080/cart/${el.id}`,{
-            method:'DELETE'
-        });
-        let data=await res.json();
+
+        axios.delete(`https://vivacious-moth-jewelry.cyclic.app/cart/${el.id}`);
+        // let res=await fetch(`https://vivacious-moth-jewelry.cyclic.app/cart/${el.id}`,{
+        //     method:'DELETE',
+        //     headers:{
+        //         'Accept': 'application/json',
+        //         "Content-Type":"application/JSON",
+        //     }
+        // });
+        // let data=await res.json();
         getData();
 
     }
@@ -95,7 +102,7 @@ export default function Cart(){
         }
     
         async function ClearData(id){
-        let res=await fetch(`http://localhost:8080/cart/${id}`,{
+        let res=await fetch(`https://vivacious-moth-jewelry.cyclic.app/cart/${id}`,{
             method:'DELETE'
         });
         let data=await res.json();

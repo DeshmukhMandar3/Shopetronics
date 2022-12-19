@@ -10,7 +10,7 @@ export default function Carry(){
 
     React.useEffect(()=>{
         async function getData(){
-            let res=await fetch(`http://localhost:8080/New_for_you`);
+            let res=await fetch(`https://vivacious-moth-jewelry.cyclic.app/New_for_you`);
             let data=await res.json();
             //console.log("NewForYou",data);
             setData(data);

@@ -14,14 +14,14 @@ export default function Navbar(){
     
     React.useEffect(()=>{
        async function getCountry(){
-            let res=await fetch(`http://localhost:8080/country`);
+            let res=await fetch(`https://vivacious-moth-jewelry.cyclic.app/country`);
             let data=await res.json();
            // console.log(data);
             setCountry(data);
         }
         getCountry();
         async function getCurrency(){
-            let res=await fetch(`http://localhost:8080/currency`);
+            let res=await fetch(`https://vivacious-moth-jewelry.cyclic.app/currency`);
             let data=await res.json();
             //console.log(data);
             setCurrency(data);
