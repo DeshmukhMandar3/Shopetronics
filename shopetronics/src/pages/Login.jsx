@@ -15,7 +15,7 @@ export default function Login(){
 
     async function handleSubmit(e){
         e.preventDefault();
-        let res=await fetch(`https://vivacious-moth-jewelry.cyclic.app/auth`);
+        let res=await fetch(`https://my-mock-server-etjr.onrender.com/auth`);
         let data=await res.json();
        let flag=false;
         data.map((el)=>{

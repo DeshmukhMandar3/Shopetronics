@@ -1,10 +1,12 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import  LargeWithAppLinksAndSocial from "../components/Footer"
-import {Box, SimpleGrid, Card, CardBody, Image, Stack, Badge,Text,Button,Flex} from "@chakra-ui/react"
+import {Box, SimpleGrid, Card, CardBody, Image, Stack, Badge,Text,Button,Flex,Table,Thead,Tbody,Tr,Td,Th,NumberInput,NumberInputField,NumberInputStepper,NumberIncrementStepper,NumberDecrementStepper} from "@chakra-ui/react"
 import Star from "../components/Star"
 import { AuthContext } from "../context/AuthContext";
-import axios from 'axios'
+import Loader from "../components/Loader";
+import CartNavbar from "../components/CartNavbar";
+import { useNavigate } from "react-router-dom";
 
 
 export default function Cart(){
@@ -14,11 +16,12 @@ export default function Cart(){
     let sp=0;
 
     const {Increase,Count,Price}=React.useContext(AuthContext);
+    const [Loading,setLoading]=React.useState(false);
     
 
 
-    let ans= Data.length!=0 && Data.map((el)=>{
-        count++;
+    Data.length!=0 && Data.map((el)=>{
+        count=count+el.count;
         
         //price string to number conversion
         let ans=(el.sellingPrice).split("");
@@ -27,31 +30,7 @@ export default function Cart(){
         sp=+(sp);
         price+=sp;
         price.toFixed(2);
-        
-       
-
-        return (
-            <Card maxW='sm' >
-                <CardBody bg="white">
-                    <div height={"30%"}>
-                    <Image h={"100%"} src={el.image} alt={el.title} borderRadius='lg'/>
-                    </div>
-                    <Stack mt='6' spacing='1.5'>
-                   if(el.discount){<Box><Badge rounded='full' paddingLeft='10px' paddingRight='10px' fontSize='13px' bg='red' color='white'>{el.discount}</Badge></Box>}
-                    <Box h="80px" overflow={"hidden"} color='black' fontSize='12px'>{el.title}</Box>
-                    <Box color="black"><Star rating={(Math.random()*(5-3.5)+3.5).toFixed(1)} count={el.review || (Math.random()*(150-25)+25).toFixed(0)} /></Box>
-                    <Flex justifyContent={"space-between"} alignItems={"center"}>
-                        <Text color='black' fontSize='15px'>{el.sellingPrice}</Text>
-                        {el.MRP && <Text color='grey' fontSize='14px'><s>{el.MRP}</s></Text>}
-                    </Flex>
-                    <Flex>
-                        <Button bg={"tomato"} color={"white"} onClick={()=>{DeleteItem(el)}}>Delete</Button>
-                    </Flex>
-                    </Stack>
-                </CardBody>
-            </Card>
-        );
-
+        price=(price*el.count);
     })
 
     React.useEffect(()=>{
@@ -65,71 +44,112 @@ export default function Cart(){
 
     
     async function getData(){
-        let res=await fetch(`https://vivacious-moth-jewelry.cyclic.app/cart/`);
+        setLoading(true);
+        let res=await fetch(`https://my-mock-server-etjr.onrender.com/cart`);
         let data=await res.json();
-        console.log("all Products",data);
+        //console.log("all Products",data);
         setData(data)
-        
+        setLoading(false);
        }
 
 
-     function DeleteItem(el){
-        // let sp=(el.sellingPrice).split("");
-        // sp.shift();
-        // let ans=sp.join("");
-        // ans=+(ans);
-        // console.log("ans",ans);
-
-        // Increase((Price-ans),(Count-1))
-
-        axios.delete(`https://vivacious-moth-jewelry.cyclic.app/cart/${el.id}`);
-        // let res=await fetch(`https://vivacious-moth-jewelry.cyclic.app/cart/${el.id}`,{
-        //     method:'DELETE',
-        //     headers:{
-        //         'Accept': 'application/json',
-        //         "Content-Type":"application/JSON",
-        //     }
-        // });
-        // let data=await res.json();
-        getData();
-
-    }
-
-        function Proceed(){
-            Data.map((el)=>{
-                ClearData(el.id);
-            })
-        }
-    
-        async function ClearData(id){
-        let res=await fetch(`https://vivacious-moth-jewelry.cyclic.app/cart/${id}`,{
-            method:'DELETE'
+     async function DeleteItem(el){
+        let res=await fetch(`https://my-mock-server-etjr.onrender.com/cart/${el.id}`,{
+            method:'DELETE',
+            headers:{
+                "Content-Type":"application/JSON",
+            }
         });
         let data=await res.json();
-        console.log(data);
         getData();
+
+    }
+
+    const navigate=useNavigate();
+        function Proceed(){
+            navigate('/checkout');
+            // Data.map((el)=>{
+            //     ClearData(el.id);
+            // })
+        }
+    
+        //Clear Cart Data
+    //     async function ClearData(id){
+    //     let res=await fetch(`https://my-mock-server-etjr.onrender.com/cart/${id}`,{
+    //         method:'DELETE'
+    //     });
+    //     let data=await res.json();
+    //     console.log(data);
+    //     getData();
         
+    // }
+    
+    //Increase or Decrease in Quantity
+   async function handleQuantity(e,el){
+       
+        el.count=+(e);
+        
+        let res=await fetch(`https://my-mock-server-etjr.onrender.com/cart/${el.id}`,{
+                method:'PATCH',
+                body:JSON.stringify(el),
+                headers:{
+                    'Content-Type':'application/JSON'
+        }
+        });
+        let data=await res.json();
+        getData();
     }
     
+
+
 
     return(
         <Box>
             <Navbar/>
-            <Flex justifyContent={"space-between"}>
-                <Box paddingLeft="25px"><Button bg={"green"} _hover={{bg:"green"}} color={"white"} onClick={Proceed} disabled={Data.length==0}>Proceed to Checkout</Button></Box>
-                <Box textAlign="right" paddingRight="25px">
-                    <Text as="b">Number of Items :&nbsp;&nbsp;&nbsp; {Count}</Text><br/>
-                    <Text as="b">Total Price :&nbsp;&nbsp;&nbsp; ₹{Price}</Text>
-                </Box>
-            </Flex>
-            <Box>
-                <SimpleGrid columns={4} spacing={10} padding="25px">{
-                   ans
-
-                }
-                    
-                </SimpleGrid>
-            </Box>
+            {CartNavbar(25)}
+            <Box>  
+            {Loading ? <Flex width="100%" height="400px" justifyContent={"center"} alignItems="center"><Loader/></Flex> : 
+                    <Table variant='simple' margin={"auto"} width={"95%"}>
+                        <Thead>
+                        <Tr>
+                            <Th>Product</Th>
+                            <Th>Details</Th>
+                            <Th>Quantity</Th>
+                            <Th>Unit Price</Th>
+                            <Th>Operation</Th>
+                        </Tr>
+                        </Thead>
+                        <Tbody >
+                        {Data.length!=0 && Data.map((el)=>{ 
+                         
+                            return (
+                            <Tr width="100%" >
+                                <Td w={"20%"}><Image src={el.image}/></Td>
+                                <Td>{el.title}</Td>
+                                <Td>
+                                <Box width={"40%"}>
+                                    <NumberInput defaultValue={el.count} min={1} max={10} onChange={(e)=>handleQuantity(e,el)} >
+                                        <NumberInputField  />
+                                        <NumberInputStepper  >
+                                            <NumberIncrementStepper  />
+                                            <NumberDecrementStepper />
+                                        </NumberInputStepper>
+                                    </NumberInput>
+                                </Box>
+                                </Td>
+                                <Td>{el.sellingPrice}</Td>
+                                <Td><Button onClick={()=>{DeleteItem(el)}} bg={"tomato"} color="white">Delete</Button></Td>
+                            </Tr> )
+                        })}
+                        <Tr fontSize={"20px"}>
+                            <Td><b>No of Items: &nbsp;{Count}</b></Td>
+                            <Td><b>Total Price : <span style={{color:"red"}}>₹&nbsp;{Price}</span></b></Td>
+                            <Td><Button bg={"green"} _hover={{bg:"green"}} color={"white"} onClick={Proceed} disabled={Data.length==0}>Proceed to Checkout</Button></Td>
+                        </Tr>
+                        </Tbody>
+                    </Table> }
+            
+            </Box>  
             <LargeWithAppLinksAndSocial/>
         </Box>
     );

@@ -1,23 +1,28 @@
 import {Text,Box,Flex,Image,Card,CardBody,Stack,Badge} from "@chakra-ui/react"
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import Loader from "./Loader";
 
 export default function LaserPrinters(){
     const [Data,setData]=React.useState([]);
     const navigate = useNavigate();
+    const [Loading,setLoading]=React.useState(false);
     let count=0;
     React.useEffect(()=>{
         async function getData(){
-            let res=await fetch(`https://vivacious-moth-jewelry.cyclic.app/laserPrinters`);
+            setLoading(true);
+            let res=await fetch(`https://my-mock-server-etjr.onrender.com/laserPrinters`);
             let data=await res.json();
             //console.log("Bestsellers",data);
             setData(data);
+            setLoading(false);
         }
         getData();
     },[])
     return(
         <Flex margin="25px" onClick={()=>{navigate('/all/laserPrinters')}}>
             <Box width="40%"><Image src={"https://img.gkbcdn.com/bb/sculpfun-20221007152503762._p1_.jpg"}/></Box>
+            {Loading ? <Flex width="57%" justifyContent={"center"} alignItems="center"><Loader/></Flex> :
             <Flex width="57%" marginLeft="15px">{Data.length!=0 && Data.map((el)=>{
                 count++;
                 if(count<=3){
@@ -40,7 +45,7 @@ export default function LaserPrinters(){
                     );
                 }
 
-            },[])}</Flex>
+            },[])}</Flex> }
             
         </Flex>
     )

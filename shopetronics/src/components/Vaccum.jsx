@@ -1,23 +1,29 @@
 import {Text,Box,Flex,Image,Card,CardBody,Stack,Badge} from "@chakra-ui/react"
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import Loader from "./Loader";
+
 
 export default function Vaccum(){
     const [Data,setData]=React.useState([]);
     const navigate=useNavigate();
+    const [Loading,setLoading]=React.useState(false);
     let count=0;
     React.useEffect(()=>{
         async function getData(){
-            let res=await fetch(`https://vivacious-moth-jewelry.cyclic.app/vacuum_cleaner`);
+            setLoading(true);
+            let res=await fetch(`https://my-mock-server-etjr.onrender.com/vacuum_cleaner`);
             let data=await res.json();
            // console.log("Vaccum",data);
             setData(data);
+            setLoading(false);
         }
         getData();
     },[])
     return(
         <Flex margin="25px" onClick={()=>{navigate("/all/vacuum_cleaner")}}>
             <Box width="40%"><Image src={"https://img.gkbcdn.com/bb/roborock-20221007152405384._p1_.jpg"}/></Box>
+            {Loading ? <Flex width="57%" justifyContent={"center"} alignItems="center"><Loader/></Flex> : 
             <Flex width="57%" marginLeft="15px">{Data.length!=0 && Data.map((el)=>{
                 count++;
                 if(count<=3){
@@ -40,7 +46,7 @@ export default function Vaccum(){
                     );
                 }
 
-            },[])}</Flex>
+            },[])}</Flex> }
             
         </Flex>
     )

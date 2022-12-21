@@ -17,7 +17,7 @@ export default function SignUp(){
             username,email,password
         }
 
-        let res=await fetch(`https://vivacious-moth-jewelry.cyclic.app/auth`,{
+        let res=await fetch(`https://my-mock-server-etjr.onrender.com/auth`,{
             method:"POST",
             body:JSON.stringify(send),
             headers:{

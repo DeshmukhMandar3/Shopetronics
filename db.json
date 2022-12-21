@@ -1525,17 +1525,7 @@
       "MRP": "₹42262.70"
     }
   ],
-  "cart": [
-    {
-      "flash_lihref": "https://www.geekbuying.com/item/Air-Plus-4-Bluetooth-5-2-TWS-Earbuds--475334.html",
-      "image": "https://img.gkbcdn.com/p/2021-10-29/P400-Bluetooth-5-2-TWS-Earbuds-475334-3._w280_p1_.jpg",
-      "title": "Air Plus 4 Bluetooth 5.2 TWS Earbuds Up to 30H Playtime Pop Up Pairing 220mAh Wireless Charging Dock Touch Control - White",
-      "sellingPrice": "₹1689.70",
-      "MRP": "₹2534.97",
-      "discount": "33% OFF",
-      "id": 1
-    }
-  ],
+  "cart": [],
   "country": [
     {
       "name": "Ascension Island",
@@ -6895,7 +6885,5 @@
       "WithdrawalDate": "2013-11"
     }
   ],
-  "auth": [
-     
-  ]
+  "auth": []
 }

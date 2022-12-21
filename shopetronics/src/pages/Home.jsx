@@ -22,19 +22,20 @@ export default function Home(){
         let count=0;
         let sp=0;
 
-        let res=await fetch(`https://vivacious-moth-jewelry.cyclic.app/cart`);
+        let res=await fetch(`https://my-mock-server-etjr.onrender.com/cart`);
         let data=await res.json();
         //console.log(data);
         data.map((el)=>{ 
-            count++;
+            count=count+el.count;
             let ans=(el.sellingPrice).split("");
             ans.shift();
             sp=ans.join("")
             sp=+(sp);
             price+=sp;
             price.toFixed(2);
-            console.log(count);
-            console.log(price);
+            price=(price*el.count);
+            // console.log(count);
+            // console.log(price);
         })
 
         Increase(price,count);

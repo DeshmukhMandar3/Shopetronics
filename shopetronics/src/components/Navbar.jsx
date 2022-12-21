@@ -14,14 +14,14 @@ export default function Navbar(){
     
     React.useEffect(()=>{
        async function getCountry(){
-            let res=await fetch(`https://vivacious-moth-jewelry.cyclic.app/country`);
+            let res=await fetch(`https://my-mock-server-etjr.onrender.com/country`);
             let data=await res.json();
            // console.log(data);
             setCountry(data);
         }
         getCountry();
         async function getCurrency(){
-            let res=await fetch(`https://vivacious-moth-jewelry.cyclic.app/currency`);
+            let res=await fetch(`https://my-mock-server-etjr.onrender.com/currency`);
             let data=await res.json();
             //console.log(data);
             setCurrency(data);
@@ -31,7 +31,7 @@ export default function Navbar(){
 
     //console.log(Country);
     return(
-        <Flex  bg={'rgb(30,128,253)'} direction={"column"} color={"white"} marginBottom={"20px"}>
+        <Flex  bg={'rgb(30,128,253)'} direction={"column"} color={"white"} marginBottom={"25px"}>
         {/* Top Box */}
             <Box display={"flex"} justifyContent={"right"} marginRight={"80px"}>
                   {/* Save 50 $ */}
