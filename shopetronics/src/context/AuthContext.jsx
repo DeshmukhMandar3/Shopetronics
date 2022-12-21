@@ -7,6 +7,11 @@ export default function AuthContextProvider({children}){
     const [username,setName]=React.useState("");
     const [Price,setPrice]=React.useState(0);
     const [Count,setCount]=React.useState(0);
+    const [Product,setProduct]=React.useState(null);
+
+    function ClDetail(el){
+        setProduct(el);
+    }
 
 
     function LoginUser(val){
@@ -25,7 +30,7 @@ export default function AuthContextProvider({children}){
 
 
     return(
-        <AuthContext.Provider value={{isAuth,Increase,Price,Count,LoginUser,username}}>{children}</AuthContext.Provider>
+        <AuthContext.Provider value={{isAuth,Increase,Price,Count,LoginUser,username,Product,ClDetail}}>{children}</AuthContext.Provider>
         
     )
 }

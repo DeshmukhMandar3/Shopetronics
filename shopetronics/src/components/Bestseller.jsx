@@ -4,17 +4,24 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Star from "./Star";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
+import Loader from "./Loader";
 
 
 export default function Bestseller(){
     const [Data,setData]=React.useState([]);
     const navigate=useNavigate();
+    const [Loading,setLoading]=React.useState(false);
+
+
     React.useEffect(()=>{
         async function getData(){
-            let res=await fetch(`http://localhost:8080/bestsellers`);
+          setLoading(true);
+            let res=await fetch(`https://my-mock-server-etjr.onrender.com/bestsellers`);
             let data=await res.json();
           //  console.log("Bestsellers",data);
             setData(data);
+          setLoading(false);
           }
         getData();
     },[]);
@@ -23,6 +30,13 @@ export default function Bestseller(){
         navigate('/all/bestsellers')
     }
     
+    const {ClDetail}=React.useContext(AuthContext);
+    function handleDetail(el){
+      ClDetail(el);
+      navigate("/detail");
+    }
+
+
     const responsive = {
         superLargeDesktop: {
           // the naming can be any, depends on you.
@@ -47,10 +61,11 @@ export default function Bestseller(){
         <Box textAlign={"left"}>
             <Text as={"b"} fontSize={"xl"} margin={"20px"} onClick={handleClick}>Best sellers</Text>
             <Box padding="15px">
+            {Loading ? <Flex justifyContent={"center"}><Loader/></Flex> : 
             <Carousel responsive={responsive}>{Data.length!=0 && Data.map((el)=>{
                 
                 return (
-                    <Card maxW='sm' >
+                    <Card maxW='sm' onClick={()=>handleDetail(el)}>
                         <CardBody bg="white">
                             <div height={"40%"}>
                             <Image h={"100%"} src={el.image} alt={el.title} borderRadius='lg'/>
@@ -65,7 +80,7 @@ export default function Bestseller(){
                         </CardBody>
                     </Card>
                 );
-            })}</Carousel>
+            })}</Carousel> }
             </Box>
             
         </Box>

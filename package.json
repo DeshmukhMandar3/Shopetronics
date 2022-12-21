@@ -20,6 +20,7 @@
   "homepage": "https://github.com/DeshmukhMandar3/-violet-spark-1183#readme",
   "dependencies": {
     "json-server": "^0.17.1",
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.20",
+    "vercel": "^28.9.0"
   }
 }

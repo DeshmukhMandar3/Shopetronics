@@ -5,6 +5,8 @@ import SignUp from '../pages/SignUp';
 import AllProducts from '../pages/AllProducts';
 import Cart from "../pages/Cart"
 import PrivateRoutes from './PrivateRoutes';
+import ProductDetails from '../pages/ProductDetails';
+import Checkout from '../pages/Checkout';
 
 export default function AllRoutes(){
     return(
@@ -15,6 +17,8 @@ export default function AllRoutes(){
                 <Route path={"/SignUp"} element={<SignUp/>}/>
                 <Route path={"/all/:category"} element={<PrivateRoutes><AllProducts/></PrivateRoutes>}/>
                 <Route path={"/cart"} element={<PrivateRoutes><Cart/></PrivateRoutes>}/>
+                <Route path={"/detail"} element={<PrivateRoutes><ProductDetails/></PrivateRoutes>}/>
+                <Route path={"/checkout"}element={<PrivateRoutes><Checkout/></PrivateRoutes>}/>
                 <Route/>
             </Routes>
         </div>
